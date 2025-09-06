@@ -20,10 +20,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 //   }
 
   // Method check
-  if (req.method !== "POST") {
-    console.log("Invalid method:", req.method);
-    return res.status(405).json({ message: "Method not allowed" });
-  }
+//   if (req.method !== "POST") {
+//     console.log("Invalid method:", req.method);
+//     return res.status(405).json({ message: "Method not allowed" });
+//   }
 
   // Body check
   console.log("Raw body received:", req.body);

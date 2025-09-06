@@ -6,6 +6,8 @@ import qs from "qs";
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { code } = req.query;
 
+  console.log('code', code);
+
   if (!code || typeof code !== "string") {
     return res.status(400).json({ error: "Missing code in query parameters" });
   }

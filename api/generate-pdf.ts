@@ -20,12 +20,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
 
-//   // Preflight
-//   if (req.method === "OPTIONS") {
-//     console.log("OPTIONS request received, ending early.");
-//     return res.status(200).end();
-//   }
-
+  if (req.method === "OPTIONS") {
+  // CORS preflight request
+	res.setHeader("Access-Control-Allow-Origin", "*");
+	res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
+	res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+	return res.status(200).end();
+}
   // Method check
 //   if (req.method !== "POST") {
 //     console.log("Invalid method:", req.method);

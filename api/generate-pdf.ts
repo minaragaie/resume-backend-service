@@ -2,6 +2,13 @@ import { NextApiRequest, NextApiResponse } from "next";
 import chromium from "chrome-aws-lambda";
 import puppeteer from "puppeteer-core";
 
+export const config = {
+  api: {
+    bodyParser: true,
+    sizeLimit: "1mb", // adjust if your HTML is large
+  },
+};
+
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   console.log("=== API Request Started ===");
   console.log("Method:", req.method);

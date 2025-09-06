@@ -12,12 +12,15 @@
   "type": "commonjs",
   "dependencies": {
     "@sparticuz/chromium": "^138.0.2",
+    "axios": "^1.11.0",
     "chrome-aws-lambda": "^10.1.0",
     "next": "^15.5.2",
     "nodemailer": "^7.0.6",
-    "puppeteer-core": "^10.4.0"
+    "puppeteer-core": "^10.4.0",
+    "qs": "^6.14.0"
   },
   "devDependencies": {
-    "@types/node": "^24.3.1"
+    "@types/node": "^24.3.1",
+    "@types/qs": "^6.14.0"
   }
 }

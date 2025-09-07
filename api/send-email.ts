@@ -17,7 +17,7 @@ async function getAccessToken() {
       client_secret: process.env.OUTLOOK_CLIENT_SECRET,
       refresh_token: process.env.OUTLOOK_REFRESH_TOKEN,
       grant_type: "refresh_token",
-      scope: "https://graph.microsoft.com/.default", // ONLY .default here
+      scope: "https://graph.microsoft.com/.default", // Only .default here
     }),
     { headers: { "Content-Type": "application/x-www-form-urlencoded" } }
   );
@@ -45,8 +45,23 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       "https://graph.microsoft.com/v1.0/me/sendMail",
       {
         message: {
-          subject: `New message from ${name} via website`,
-          body: { contentType: "HTML", content: `<p>${message}</p><p>From: ${name} &lt;${email}&gt;</p>` },
+          subject: `📩 New message from ${name} via website`,
+          body: {
+            contentType: "HTML",
+            content: `
+              <div style="font-family: Arial, sans-serif; line-height: 1.5; color: #333;">
+                <h2 style="color: #4ec9b0;">New Contact Form Submission</h2>
+                <p><strong>Name:</strong> ${name}</p>
+                <p><strong>Email:</strong> <a href="mailto:${email}">${email}</a></p>
+                <p><strong>Message:</strong></p>
+                <div style="padding: 10px; border-left: 4px solid #007acc; background: #f5f5f5;">
+                  ${message.replace(/\n/g, "<br>")}
+                </div>
+                <hr>
+                <p style="font-size: 12px; color: #666;">This message was sent via the website contact form.</p>
+              </div>
+            `,
+          },
           toRecipients: [{ emailAddress: { address: process.env.EMAIL_USER } }],
         },
         saveToSentItems: "true",

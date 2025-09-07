@@ -17,7 +17,7 @@ async function getAccessToken() {
       client_secret: process.env.OUTLOOK_CLIENT_SECRET,
       refresh_token: process.env.OUTLOOK_REFRESH_TOKEN,
       grant_type: "refresh_token",
-      scope: "https://graph.microsoft.com/.default offline_access Mail.Send",
+      scope: "https://graph.microsoft.com/.default", // ONLY .default here
     }),
     { headers: { "Content-Type": "application/x-www-form-urlencoded" } }
   );

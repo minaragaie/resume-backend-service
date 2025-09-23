@@ -32,7 +32,7 @@
         .header {
             text-align: center;
             margin-bottom: 30px;
-            border-bottom: 3px solid #3182ce;
+            border-bottom: 3px solid #ff6b35;
             padding-bottom: 20px;
         }
         
@@ -74,12 +74,12 @@
         .section-title {
             font-size: 14px;
             font-weight: 600;
-            color: #2d3748;
+            color: #ff6b35;
             text-transform: uppercase;
             letter-spacing: 1px;
             margin-bottom: 15px;
             padding-bottom: 5px;
-            border-bottom: 2px solid #e2e8f0;
+            border-bottom: 2px solid #ff6b35;
         }
         
         /* Summary Section */
@@ -112,7 +112,7 @@
         .company {
             font-size: 11px;
             font-weight: 500;
-            color: #3182ce;
+            color: #ff6b35;
         }
         
         .job-dates {
@@ -159,7 +159,7 @@
         
         .achievement-item::before {
             content: "•";
-            color: #3182ce;
+            color: #ff6b35;
             font-weight: bold;
             position: absolute;
             left: 0;
@@ -178,7 +178,7 @@
         
         .institution {
             font-size: 10px;
-            color: #3182ce;
+            color: #ff6b35;
             margin-bottom: 2px;
         }
         
@@ -187,15 +187,16 @@
             color: #718096;
         }
         
-        /* Skills Section */
+        /* Skills Section - ATS Friendly */
         .skills-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
+            display: block;
         }
         
         .skill-category {
-            margin-bottom: 15px;
+            margin-bottom: 12px;
+            display: inline-block;
+            width: 48%;
+            vertical-align: top;
         }
         
         .skill-category-title {
@@ -261,7 +262,7 @@
         
         .cert-issuer {
             font-size: 10px;
-            color: #3182ce;
+            color: #ff6b35;
         }
         
         .cert-date {

@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume - {{personalInfo.name}}</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #2d3748;
+            background: #ffffff;
+            font-size: 11px;
+        }
+        
+        .resume-container {
+            max-width: 8.5in;
+            margin: 0 auto;
+            padding: 0.5in;
+            background: white;
+        }
+        
+        /* Header Section */
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 3px solid #3182ce;
+            padding-bottom: 20px;
+        }
+        
+        .name {
+            font-size: 28px;
+            font-weight: 700;
+            color: #1a202c;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+        }
+        
+        .title {
+            font-size: 16px;
+            font-weight: 500;
+            color: #4a5568;
+            margin-bottom: 15px;
+        }
+        
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            font-size: 10px;
+            color: #718096;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        /* Section Headers */
+        .section {
+            margin-bottom: 25px;
+        }
+        
+        .section-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #2d3748;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+            padding-bottom: 5px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+        
+        /* Summary Section */
+        .summary {
+            font-size: 11px;
+            line-height: 1.7;
+            color: #4a5568;
+            text-align: justify;
+        }
+        
+        /* Experience Section */
+        .experience-item {
+            margin-bottom: 20px;
+            page-break-inside: avoid;
+        }
+        
+        .job-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 8px;
+        }
+        
+        .job-title {
+            font-size: 12px;
+            font-weight: 600;
+            color: #2d3748;
+        }
+        
+        .company {
+            font-size: 11px;
+            font-weight: 500;
+            color: #3182ce;
+        }
+        
+        .job-dates {
+            font-size: 10px;
+            color: #718096;
+            white-space: nowrap;
+        }
+        
+        .job-description {
+            font-size: 10px;
+            line-height: 1.6;
+            color: #4a5568;
+            margin-bottom: 10px;
+        }
+        
+        .technologies {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+            margin-bottom: 8px;
+        }
+        
+        .tech-tag {
+            background: #edf2f7;
+            color: #2d3748;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 9px;
+            font-weight: 500;
+        }
+        
+        .achievements {
+            margin-top: 8px;
+        }
+        
+        .achievement-item {
+            font-size: 10px;
+            line-height: 1.5;
+            color: #4a5568;
+            margin-bottom: 4px;
+            padding-left: 15px;
+            position: relative;
+        }
+        
+        .achievement-item::before {
+            content: "•";
+            color: #3182ce;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        
+        /* Education Section */
+        .education-item {
+            margin-bottom: 15px;
+        }
+        
+        .degree {
+            font-size: 11px;
+            font-weight: 600;
+            color: #2d3748;
+        }
+        
+        .institution {
+            font-size: 10px;
+            color: #3182ce;
+            margin-bottom: 2px;
+        }
+        
+        .education-year {
+            font-size: 10px;
+            color: #718096;
+        }
+        
+        /* Skills Section */
+        .skills-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        .skill-category {
+            margin-bottom: 15px;
+        }
+        
+        .skill-category-title {
+            font-size: 11px;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .skill-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 3px;
+        }
+        
+        .skill-item {
+            background: #f7fafc;
+            color: #2d3748;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 9px;
+            font-weight: 500;
+            border: 1px solid #e2e8f0;
+        }
+        
+        /* Projects Section */
+        .project-item {
+            margin-bottom: 15px;
+        }
+        
+        .project-name {
+            font-size: 11px;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 4px;
+        }
+        
+        .project-description {
+            font-size: 10px;
+            line-height: 1.5;
+            color: #4a5568;
+            margin-bottom: 6px;
+        }
+        
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 3px;
+        }
+        
+        /* Certifications Section */
+        .cert-item {
+            margin-bottom: 12px;
+        }
+        
+        .cert-name {
+            font-size: 11px;
+            font-weight: 600;
+            color: #2d3748;
+        }
+        
+        .cert-issuer {
+            font-size: 10px;
+            color: #3182ce;
+        }
+        
+        .cert-date {
+            font-size: 10px;
+            color: #718096;
+        }
+        
+        /* Highlight skills in text */
+        .skill-highlight {
+            background: #fef5e7;
+            color: #d69e2e;
+            padding: 1px 3px;
+            border-radius: 2px;
+            font-weight: 500;
+        }
+        
+        /* Page breaks */
+        .page-break {
+            page-break-before: always;
+        }
+        
+        /* Print optimizations */
+        @media print {
+            body {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            
+            .resume-container {
+                padding: 0.3in;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="resume-container">
+        <!-- Header -->
+        <div class="header">
+            <h1 class="name">{{personalInfo.name}}</h1>
+            <div class="title">Full Stack Developer</div>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <span>📧</span>
+                    <span>{{personalInfo.email}}</span>
+                </div>
+                <div class="contact-item">
+                    <span>📱</span>
+                    <span>{{personalInfo.phone}}</span>
+                </div>
+                <div class="contact-item">
+                    <span>📍</span>
+                    <span>{{personalInfo.location}}</span>
+                </div>
+                <div class="contact-item">
+                    <span>🔗</span>
+                    <span>{{personalInfo.linkedin}}</span>
+                </div>
+                <div class="contact-item">
+                    <span>💻</span>
+                    <span>{{personalInfo.github}}</span>
+                </div>
+                <div class="contact-item">
+                    <span>🌐</span>
+                    <span>{{personalInfo.website}}</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Professional Summary -->
+        <div class="section">
+            <h2 class="section-title">Professional Summary</h2>
+            <div class="summary">{{personalInfo.summary}}</div>
+        </div>
+
+        <!-- Experience -->
+        <div class="section">
+            <h2 class="section-title">Professional Experience</h2>
+            {{#each experience}}
+            <div class="experience-item">
+                <div class="job-header">
+                    <div>
+                        <div class="job-title">{{title}}</div>
+                        <div class="company">{{company}}</div>
+                    </div>
+                    <div class="job-dates">{{startDate}} - {{endDate}}</div>
+                </div>
+                <div class="job-description">{{description}}</div>
+                <div class="technologies">
+                    {{#each technologies}}
+                    <span class="tech-tag">{{this}}</span>
+                    {{/each}}
+                </div>
+                {{#if achievements}}
+                <div class="achievements">
+                    {{#each achievements}}
+                    <div class="achievement-item">{{this}}</div>
+                    {{/each}}
+                </div>
+                {{/if}}
+            </div>
+            {{/each}}
+        </div>
+
+        <!-- Skills -->
+        <div class="section">
+            <h2 class="section-title">Technical Skills</h2>
+            <div class="skills-container">
+                <div class="skill-category">
+                    <div class="skill-category-title">Languages</div>
+                    <div class="skill-list">
+                        {{#each skills.languages}}
+                        <span class="skill-item">{{this}}</span>
+                        {{/each}}
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <div class="skill-category-title">Frameworks</div>
+                    <div class="skill-list">
+                        {{#each skills.frameworks}}
+                        <span class="skill-item">{{this}}</span>
+                        {{/each}}
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <div class="skill-category-title">Databases</div>
+                    <div class="skill-list">
+                        {{#each skills.databases}}
+                        <span class="skill-item">{{this}}</span>
+                        {{/each}}
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <div class="skill-category-title">Technologies</div>
+                    <div class="skill-list">
+                        {{#each skills.technologies}}
+                        <span class="skill-item">{{this}}</span>
+                        {{/each}}
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <div class="skill-category-title">Version Control</div>
+                    <div class="skill-list">
+                        {{#each skills.versionControl}}
+                        <span class="skill-item">{{this}}</span>
+                        {{/each}}
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <div class="skill-category-title">Methodologies</div>
+                    <div class="skill-list">
+                        {{#each skills.methodologies}}
+                        <span class="skill-item">{{this}}</span>
+                        {{/each}}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Education -->
+        <div class="section">
+            <h2 class="section-title">Education</h2>
+            {{#each education}}
+            <div class="education-item">
+                <div class="degree">{{degree}}</div>
+                <div class="institution">{{institution}}</div>
+                <div class="education-year">{{year}} - GPA: {{gpa}}</div>
+            </div>
+            {{/each}}
+        </div>
+
+        <!-- Projects -->
+        {{#if projects}}
+        <div class="section">
+            <h2 class="section-title">Key Projects</h2>
+            {{#each projects}}
+            <div class="project-item">
+                <div class="project-name">{{name}}</div>
+                <div class="project-description">{{description}}</div>
+                <div class="project-tech">
+                    {{#each technologies}}
+                    <span class="tech-tag">{{this}}</span>
+                    {{/each}}
+                </div>
+            </div>
+            {{/each}}
+        </div>
+        {{/if}}
+
+        <!-- Certifications -->
+        {{#if certifications}}
+        <div class="section">
+            <h2 class="section-title">Certifications</h2>
+            {{#each certifications}}
+            <div class="cert-item">
+                <div class="cert-name">{{name}}</div>
+                <div class="cert-issuer">{{issuer}}</div>
+                <div class="cert-date">{{date}}</div>
+            </div>
+            {{/each}}
+        </div>
+        {{/if}}
+    </div>
+</body>
+</html>

@@ -12,15 +12,38 @@ export const config = {
   },
 };
 
-// Helper function to highlight skills in text
+// Helper function to highlight skills in text with orange color only
 function highlightSkills(text: string, skills: string[]): string {
   if (!text || !skills) return text;
   
   let highlightedText = text;
+  
   skills.forEach(skill => {
     const regex = new RegExp(`\\b${skill.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`, 'gi');
     highlightedText = highlightedText.replace(regex, `<span class="skill-highlight">${skill}</span>`);
   });
+  
+  return highlightedText;
+}
+
+// Helper function to highlight metrics and numbers
+function highlightMetrics(text: string): string {
+  if (!text) return text;
+  
+  // Highlight percentages, numbers, and common metrics
+  let highlightedText = text;
+  
+  // Highlight percentages
+  highlightedText = highlightedText.replace(/(\d+%)/g, '<span class="metric-highlight">$1</span>');
+  
+  // Highlight numbers with common metric words
+  highlightedText = highlightedText.replace(/(\d+)\s*(years?|months?|days?|hours?|times?|x|fold|million|billion|thousand|k|M|B)/gi, '<span class="metric-highlight">$1 $2</span>');
+  
+  // Highlight dollar amounts
+  highlightedText = highlightedText.replace(/(\$[\d,]+(?:\.\d{2})?)/g, '<span class="metric-highlight">$1</span>');
+  
+  // Highlight ratios and comparisons
+  highlightedText = highlightedText.replace(/(\d+:\d+|\d+\/\d+)/g, '<span class="metric-highlight">$1</span>');
   
   return highlightedText;
 }
@@ -52,30 +75,35 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     // Compile the Handlebars template
     const template = Handlebars.compile(templateContent);
 
-    // Prepare data for template with skill highlighting
+    // Collect all skills from skills object and experience technologies
+    const allSkills = [
+      ...resumeData.skills.frameworks,
+      ...resumeData.skills.technologies,
+      ...resumeData.skills.databases,
+      ...resumeData.skills.versionControl,
+      ...resumeData.skills.methodologies,
+      ...resumeData.skills.standards
+    ];
+    
+    // Add technologies from each experience
+    resumeData.experience.forEach((exp: any) => {
+      if (exp.technologies) {
+        allSkills.push(...exp.technologies);
+      }
+    });
+
+    // Prepare data for template with skill and metric highlighting
     const templateData = {
       ...resumeData,
       personalInfo: {
         ...resumeData.personalInfo,
-        summary: highlightSkills(resumeData.personalInfo.summary, [
-          ...resumeData.skills.languages,
-          ...resumeData.skills.frameworks,
-          ...resumeData.skills.technologies
-        ])
+        summary: highlightMetrics(highlightSkills(resumeData.summary || resumeData.personalInfo.summary, allSkills))
       },
       experience: resumeData.experience.map((exp: any) => ({
         ...exp,
-        description: highlightSkills(exp.description, [
-          ...resumeData.skills.languages,
-          ...resumeData.skills.frameworks,
-          ...resumeData.skills.technologies
-        ]),
+        description: highlightMetrics(highlightSkills(exp.description, allSkills)),
         achievements: exp.achievements?.map((achievement: string) => 
-          highlightSkills(achievement, [
-            ...resumeData.skills.languages,
-            ...resumeData.skills.frameworks,
-            ...resumeData.skills.technologies
-          ])
+          highlightMetrics(highlightSkills(achievement, allSkills))
         )
       }))
     };

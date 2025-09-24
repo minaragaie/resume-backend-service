@@ -2,6 +2,43 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import fs from "fs";
 import path from "path";
 
+// Define the resume data interface
+interface ResumeData {
+  personalInfo: any;
+  experience: Array<{
+    id: number;
+    company: string;
+    title: string;
+    startDate: string;
+    endDate: string;
+    description: string;
+    technologies: string[];
+    achievements?: string[];
+  }>;
+  education: Array<{
+    degree: string;
+    institution: string;
+    year: string;
+    gpa: string;
+  }>;
+  certifications: Array<{
+    name: string;
+    issuer: string;
+    date: string;
+  }>;
+  skills: {
+    languages: string[];
+    frameworks: string[];
+    databases: string[];
+    technologies: string[];
+    versionControl: string[];
+    methodologies: string[];
+    standards: string[];
+  };
+  projects: any[];
+  additionalInfo: string;
+}
+
 export const config = {
   api: {
     bodyParser: true,
@@ -33,7 +70,24 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   try {
     // Read current data
-    let resumeData = {};
+    let resumeData: ResumeData = {
+      personalInfo: {},
+      experience: [],
+      education: [],
+      certifications: [],
+      skills: {
+        languages: [],
+        frameworks: [],
+        databases: [],
+        technologies: [],
+        versionControl: [],
+        methodologies: [],
+        standards: []
+      },
+      projects: [],
+      additionalInfo: ""
+    };
+    
     if (fs.existsSync(filePath)) {
       const fileContent = fs.readFileSync(filePath, 'utf8');
       resumeData = JSON.parse(fileContent);

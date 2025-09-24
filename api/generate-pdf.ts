@@ -1,9 +1,11 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import puppeteer from "puppeteer-core";
-import chromium from "@sparticuz/chromium";
 import fs from "fs";
 import path from "path";
 import Handlebars from "handlebars";
+
+// Dynamic import for chromium to avoid CommonJS/ESM issues
+const chromium = require("@sparticuz/chromium");
 
 export const config = {
   api: {

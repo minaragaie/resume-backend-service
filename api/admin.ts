@@ -110,6 +110,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           });
         }
 
+        // Validate required fields
+        if (!newData.personalInfo || !newData.experience || !newData.education || !newData.skills) {
+          return res.status(400).json({
+            success: false,
+            message: 'Missing required resume sections'
+          });
+        }
+
         // Create backup
         if (fs.existsSync(filePath)) {
           const backupPath = path.join(process.cwd(), 'data', `resume.backup.${Date.now()}.json`);
@@ -123,13 +131,22 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         }
 
         // Write the updated data
-        fs.writeFileSync(filePath, JSON.stringify(newData, null, 2), 'utf8');
-
-        return res.status(200).json({
-          success: true,
-          message: 'Resume data saved successfully',
-          timestamp: new Date().toISOString()
-        });
+        try {
+          fs.writeFileSync(filePath, JSON.stringify(newData, null, 2), 'utf8');
+          
+          return res.status(200).json({
+            success: true,
+            message: 'Resume data saved successfully',
+            timestamp: new Date().toISOString()
+          });
+        } catch (writeError: any) {
+          console.error('File write error:', writeError);
+          return res.status(500).json({
+            success: false,
+            message: 'Failed to save resume data',
+            error: writeError?.message || 'File write operation failed'
+          });
+        }
       } else if (req.method === "DELETE") {
         // Reset resume data
         const defaultData = {
@@ -278,7 +295,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     return res.status(500).json({
       success: false,
       message: 'Internal server error',
-      error: String(error)
+      error: error?.message || String(error)
     });
   }
 }

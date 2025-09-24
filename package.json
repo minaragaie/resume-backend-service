@@ -15,6 +15,7 @@
     "axios": "^1.11.0",
     "chrome-aws-lambda": "^10.1.0",
     "handlebars": "^4.7.8",
+    "jsonwebtoken": "^9.0.2",
     "next": "^15.5.2",
     "nodemailer": "^7.0.6",
     "puppeteer-core": "^10.4.0",

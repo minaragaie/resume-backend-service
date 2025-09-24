@@ -1,5 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import crypto from "crypto";
+import jwt from "jsonwebtoken";
 
 export const config = {
   api: {
@@ -20,9 +21,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   if (req.method === "OPTIONS") return res.status(200).end();
 
   // Admin credentials (in production, use environment variables)
-  const ADMIN_USERNAME = process.env.ADMIN_USERNAME || "admin";
-  const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "admin123";
-  const JWT_SECRET = process.env.JWT_SECRET || "your-secret-key-change-in-production";
+  const ADMIN_USERNAME = process.env.ADMIN_USERNAME;
+  const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
+  const JWT_SECRET = process.env.JWT_SECRET;
 
   try {
     if (req.method === "POST") {
@@ -38,17 +39,22 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
       // Verify credentials
       if (username === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
-        // Create a simple token (in production, use proper JWT)
-        const token = crypto.randomBytes(32).toString('hex');
-        
-        // Store token with expiration (in production, use Redis or database)
-        const expiresAt = new Date(Date.now() + 24 * 60 * 60 * 1000); // 24 hours
+        // Create JWT token with proper secret
+        const token = jwt.sign(
+          { 
+            username: username, 
+            role: 'admin' 
+          }, 
+          JWT_SECRET, 
+          { 
+            expiresIn: '24h' 
+          }
+        );
         
         return res.status(200).json({
           success: true,
           message: 'Authentication successful',
           token: token,
-          expiresAt: expiresAt.toISOString(),
           user: {
             username: username,
             role: 'admin'
@@ -74,21 +80,22 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
       const token = authHeader.substring(7);
       
-      // In production, verify token against database/Redis
-      // For now, we'll just check if it exists and is valid format
-      if (token && token.length === 64) {
+      try {
+        // Verify JWT token with proper secret
+        const decoded = jwt.verify(token, JWT_SECRET) as any;
+        
         return res.status(200).json({
           success: true,
           message: 'Token is valid',
           user: {
-            username: ADMIN_USERNAME,
-            role: 'admin'
+            username: decoded.username,
+            role: decoded.role
           }
         });
-      } else {
+      } catch (error) {
         return res.status(401).json({
           success: false,
-          message: 'Invalid token'
+          message: 'Invalid or expired token'
         });
       }
 

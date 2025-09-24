@@ -41,7 +41,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   try {
     const accessToken = await getAccessToken();
 
-    const graphResponse = await axios.post(
+    await axios.post(
       "https://graph.microsoft.com/v1.0/me/sendMail",
       {
         message: {

@@ -24,6 +24,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
   const JWT_SECRET = process.env.JWT_SECRET;
 
+  // Validate required environment variables
+  if (!JWT_SECRET) {
+    return res.status(500).json({
+      success: false,
+      message: 'JWT_SECRET environment variable is not configured'
+    });
+  }
+
   try {
     if (req.method === "POST") {
       // Login endpoint

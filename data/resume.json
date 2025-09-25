@@ -427,6 +427,18 @@
       "Performance Optimization"
     ]
   },
-  "projects": [],
+  "projects": [
+    {
+      "id": 1,
+      "name": "",
+      "description": "",
+      "technologies": [],
+      "status": "",
+      "year": "",
+      "githubUrl": "",
+      "liveUrl": "",
+      "imageUrl": ""
+    }
+  ],
   "additionalInfo": "All my projects are hosted on private repositories due to confidentiality reasons. They are available for review upon request. Security expertise demonstrated through multiple certifications, including Google Cybersecurity Certificate"
 }

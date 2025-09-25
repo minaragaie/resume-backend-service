@@ -1,50 +1,26 @@
 {
   "personalInfo": {
-    "name": "MINA YOUANESS!",
+    "name": "MINA YOUANESS",
     "email": "minaragaie@hotmail.com",
     "phone": "609.839.3558",
     "location": "Voorhees, NJ",
     "linkedin": "https://www.linkedin.com/in/mina-youaness-ba833713/",
     "github": "https://github.com/minaragaie",
-    "website": "https://minaragaie.github.io/"
+    "website": "https://minaragaie.github.io/",
+    "summary": "A highly innovative and passionate Full-Stack front-end web development technologist, with over 10 years of experience in developing and designing creative and interactive user-centric websites and portals."
   },
-  "summary": "Test update",
   "experience": [],
   "education": [],
   "certifications": [],
   "skills": {
-    "languages": [
-      "English",
-      "Arabic"
-    ],
-    "frameworks": [
-      "Angular",
-      "React",
-      "Node.js"
-    ],
-    "databases": [
-      "PostgreSQL",
-      "MySQL"
-    ],
-    "technologies": [
-      "JavaScript",
-      "TypeScript",
-      "HTML5",
-      "CSS3"
-    ],
-    "versionControl": [
-      "Git",
-      "GitHub"
-    ],
-    "methodologies": [
-      "Agile",
-      "Scrum"
-    ],
-    "standards": [
-      "RESTful APIs",
-      "JWT"
-    ]
+    "languages": [],
+    "frameworks": [],
+    "databases": [],
+    "technologies": [],
+    "versionControl": [],
+    "methodologies": [],
+    "standards": []
   },
   "projects": [],
-  "additionalInfo": "Test"
+  "additionalInfo": ""
 }

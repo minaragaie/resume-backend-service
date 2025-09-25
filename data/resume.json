@@ -1,12 +1,13 @@
 {
   "personalInfo": {
-    "name": "MINA YOUANESS!",
+    "name": "Mina Youaness",
     "email": "minaragaie@hotmail.com",
     "phone": "609.839.3558",
     "location": "Voorhees, NJ",
     "linkedin": "https://www.linkedin.com/in/mina-youaness-ba833713/",
     "github": "https://github.com/minaragaie",
-    "website": "https://minaragaie.github.io/"
+    "website": "https://minaragaie.github.io/",
+    "summary": "A highly innovative and passionate Full-Stack front-end web development technologist, with over 10 years of experience in developing and designing creative and interactive user-centric websites and portals. Looking to build scalable, performing applications and creating meaningful user experiences through beautiful and inspired web applications. Possess a strong security mindset, integrating secure coding practices and proactive measures to mitigate risks in web application development"
   },
   "summary": "A highly innovative and passionate Full-Stack front-end web development technologist, with over 10 years of experience in developing and designing creative and interactive user-centric websites and portals. Looking to build scalable, performing applications and creating meaningful user experiences through beautiful and inspired web applications. Possess a strong security mindset, integrating secure coding practices and proactive measures to mitigate risks in web application development",
   "experience": [

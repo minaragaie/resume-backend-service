@@ -1,26 +1,431 @@
 {
   "personalInfo": {
-    "name": "Mina Youaness",
+    "name": "MINA YOUANESS!",
     "email": "minaragaie@hotmail.com",
     "phone": "609.839.3558",
     "location": "Voorhees, NJ",
     "linkedin": "https://www.linkedin.com/in/mina-youaness-ba833713/",
     "github": "https://github.com/minaragaie",
-    "website": "https://minaragaie.github.io/",
-    "summary": "A highly innovative and passionate Full-Stack front-end web development technologist, with over 10 years of experience in developing and designing creative and interactive user-centric websites and portals."
+    "website": "https://minaragaie.github.io/"
   },
-  "experience": [],
-  "education": [],
-  "certifications": [],
+  "summary": "A highly innovative and passionate Full-Stack front-end web development technologist, with over 10 years of experience in developing and designing creative and interactive user-centric websites and portals. Looking to build scalable, performing applications and creating meaningful user experiences through beautiful and inspired web applications. Possess a strong security mindset, integrating secure coding practices and proactive measures to mitigate risks in web application development",
+  "experience": [
+    {
+      "id": 0,
+      "company": "HARPLABS INC.",
+      "title": "Full-Stack Web Developer",
+      "startDate": "Feb 2023",
+      "endDate": "April 2025",
+      "description": "Worked on Turris ERP project and other Harplabs client projects.",
+      "technologies": [
+        "Angular",
+        "React",
+        "DevExtreme",
+        "Flutter",
+        "PWA",
+        "Node.js",
+        "TypeScript",
+        "JavaScript",
+        "SASS",
+        "LESS",
+        "jQuery",
+        "Spring Boot",
+        "PostgreSQL",
+        "MySQL",
+        "T-SQL",
+        "WebSockets",
+        "WordPress",
+        "Bootstrap",
+        "Tailwind CSS"
+      ],
+      "achievements": [
+        "Led frontend projects using Angular, React, Material components, and PWA for seamless user experiences.",
+        "Utilized Angular with DevExtreme for building robust and responsive interfaces, and developed backend APIs with NodeJs to manage DevExtreme needs.",
+        "Used TypeScript, JavaScript, SASS, and LESS for scalable, maintainable code and advanced CSS management.",
+        "Integrated jQuery for DOM manipulation in legacy projects, enhancing dynamic content updates.",
+        "Collaborated across teams to gather requirements and design user-friendly interfaces.",
+        "Designed and implemented RESTful APIs with Spring Boot and Node.js, ensuring seamless front-end-backend integration.",
+        "Managed PostgreSQL, MySQL & T-SQL databases for data integrity and performance.",
+        "Implemented WebSockets for real-time communication, enhancing application dynamics.",
+        "Led WordPress projects with Bootstrap/Tailwind CSS for custom themes/plugins, ensuring seamless communication with other servers through APIs.",
+        "Participated in code reviews, optimizing quality and maintainability.",
+        "Stayed updated on industry trends, expanding skills for innovative solutions.",
+        "Ensured secure development practices, including data validation and protection of sensitive user information, throughout the lifecycle of PWA and API development."
+      ]
+    },
+    {
+      "id": 1,
+      "company": "TURRIS GROUP",
+      "title": "Full-Stack Web Developer (Contract for Turris Group)",
+      "startDate": "May 2022",
+      "endDate": "April 2025",
+      "description": "Turris ERP System, a web app ERP that manages day-to-day business activities for Turris Corp.",
+      "technologies": [
+        "ERP Systems",
+        "Industrial Web Applications",
+        "Security",
+        "Role-based Access Control",
+        "Encryption"
+      ],
+      "achievements": [
+        "Developed comprehensive ERP system managing day-to-day business activities for Turris Corp.",
+        "Implemented robust security measures with role-based access control and encryption protocols.",
+        "Built industrial web applications with focus on scalability and performance.",
+        "Collaborated with stakeholders to understand business requirements and translate them into technical solutions.",
+        "Ensured data integrity and security throughout the ERP system lifecycle."
+      ]
+    },
+    {
+      "id": 2,
+      "company": "QUAENET",
+      "title": "Full-Stack Web Developer",
+      "startDate": "May 2018",
+      "endDate": "April 2022",
+      "description": "EntityConnect is an Entity management & communications app with special focus on the end user. The app handles church membership, groups, check-in, volunteers, event registration, contributions, online/mobile donations, Services management, reporting, assimilation, workflow and many more features.",
+      "technologies": [
+        "Angular",
+        "Kendo UI",
+        "SailsJS",
+        "Node.js",
+        "Agile",
+        "Scrum",
+        "Database Design",
+        "Team Leadership"
+      ],
+      "achievements": [
+        "Led development of EntityConnect, a comprehensive entity management and communications platform.",
+        "Implemented church membership management, group organization, and volunteer coordination systems.",
+        "Developed event registration and contribution tracking features with online/mobile donation capabilities.",
+        "Designed and implemented database schemas for complex church management workflows.",
+        "Led team using Agile/Scrum methodologies for efficient project delivery.",
+        "Built reporting and assimilation features to enhance church community engagement.",
+        "Utilized Angular with Kendo UI for rich, interactive user interfaces.",
+        "Implemented SailsJS and Node.js backend for scalable server-side operations."
+      ]
+    },
+    {
+      "id": 3,
+      "company": "ASQUERA",
+      "title": "Full-Stack Web Developer",
+      "startDate": "May 2018",
+      "endDate": "April 2021",
+      "description": "Abgadya (alphabetic) online learning platform PWA for high school students. Provides educational content through books, videos, lessons, and exercises for students",
+      "technologies": [
+        "Angular 10",
+        "Ionic",
+        "PHP",
+        "Laravel",
+        "WordPress",
+        "PWA"
+      ],
+      "achievements": [
+        "Developed Abgadya, an innovative online learning platform PWA for high school students.",
+        "Created comprehensive educational content delivery system with books, videos, lessons, and exercises.",
+        "Implemented Progressive Web App (PWA) features for offline learning capabilities.",
+        "Built responsive cross-platform application using Angular 10 and Ionic framework.",
+        "Developed robust backend using PHP and Laravel for content management and user progress tracking.",
+        "Integrated WordPress for content management and administrative features.",
+        "Designed user-friendly interface optimized for student learning experience.",
+        "Implemented interactive exercises and progress tracking for enhanced student engagement."
+      ]
+    },
+    {
+      "id": 4,
+      "company": "CADUCEUS LANE",
+      "title": "Full-Stack Web Developer (Freelance)",
+      "startDate": "April 2016",
+      "endDate": "April 2018",
+      "description": "Specializing in marketing solutions for healthcare industries; Medical Rep App helps pharmaceutical companies manage their sales teams and medical reps",
+      "technologies": [
+        "Ionic",
+        "Angular 7-10",
+        "Bootstrap",
+        "NGX Bootstrap",
+        "PHP",
+        "Healthcare Solutions",
+        "Cross-platform Development"
+      ],
+      "achievements": [
+        "Specialized in developing marketing solutions for healthcare industries.",
+        "Created Medical Rep App for pharmaceutical companies to manage sales teams and medical representatives.",
+        "Built cross-platform mobile applications using Ionic and Angular 7-10.",
+        "Implemented responsive web interfaces using Bootstrap and NGX Bootstrap.",
+        "Developed PHP backend solutions for healthcare data management.",
+        "Designed user-friendly interfaces for complex healthcare workflows.",
+        "Ensured compliance with healthcare industry standards and regulations.",
+        "Delivered scalable solutions for pharmaceutical sales team management."
+      ]
+    }
+  ],
+  "education": [
+    {
+      "degree": "Bachelor of Computer Science",
+      "institution": "College of Computing & Information Technology",
+      "year": "2012",
+      "gpa": ""
+    }
+  ],
+  "certifications": [
+    {
+      "name": "AI For Everyone",
+      "issuer": "DeepLearning.AI",
+      "icon": "Ai",
+      "status": "Completed",
+      "description": "Introduction to AI concepts and applications",
+      "color": "from-yellow-400 to-orange-500",
+      "skills": [
+        "AI Basics",
+        "Machine Learning Concepts"
+      ],
+      "verify": "https://www.coursera.org/account/accomplishments/verify/SV0FYU7RA3P0",
+      "pathway": []
+    },
+    {
+      "name": "Google Cybersecurity Specialization",
+      "issuer": "Google",
+      "icon": "Shield",
+      "status": "Certified",
+      "description": "Comprehensive cybersecurity fundamentals, risk management, and security practices",
+      "color": "from-red-500 to-orange-500",
+      "skills": [
+        "Security Frameworks",
+        "Risk Assessment",
+        "Incident Response",
+        "Network Security"
+      ],
+      "verify": "https://www.coursera.org/account/accomplishments/specialization/H683C0JO3OPH",
+      "pathway": [
+        {
+          "name": "Foundations of Cybersecurity",
+          "issuer": "Google",
+          "icon": "Shield",
+          "status": "Completed",
+          "description": "Core cybersecurity principles and risk management",
+          "color": "from-red-500 to-orange-500",
+          "skills": [
+            "Cybersecurity Fundamentals",
+            "Risk Management"
+          ],
+          "verify": "https://www.coursera.org/account/accomplishments/records/RWMESRX2VZMH"
+        },
+        {
+          "name": "Play It Safe: Manage Security Risks",
+          "issuer": "Google",
+          "icon": "Shield",
+          "status": "Completed",
+          "description": "Manage and mitigate security risks in organizations",
+          "color": "from-red-500 to-orange-500",
+          "skills": [
+            "Risk Mitigation",
+            "Security Policies"
+          ],
+          "verify": "https://www.coursera.org/account/accomplishments/records/Z4SNJFW2NVSP"
+        },
+        {
+          "name": "Connect and Protect: Networks and Network Security",
+          "issuer": "Google",
+          "icon": "Shield",
+          "status": "Completed",
+          "description": "Network fundamentals and security practices",
+          "color": "from-red-500 to-orange-500",
+          "skills": [
+            "Network Security",
+            "Firewalls",
+            "Secure Communication"
+          ],
+          "verify": "https://www.coursera.org/account/accomplishments/records/NDPLO0COTVHX"
+        },
+        {
+          "name": "Tools of the Trade: Linux and SQL",
+          "issuer": "Google",
+          "icon": "Terminal",
+          "status": "Completed",
+          "description": "Linux commands and SQL database management for cybersecurity",
+          "color": "from-red-500 to-orange-500",
+          "skills": [
+            "Linux CLI",
+            "SQL Queries",
+            "Database Management"
+          ],
+          "verify": "https://www.coursera.org/account/accomplishments/records/HRNB68820N7V"
+        },
+        {
+          "name": "Assets, Threats, and Vulnerabilities",
+          "issuer": "Google",
+          "icon": "Shield",
+          "status": "Completed",
+          "description": "Identify key assets, threats, and vulnerabilities in systems",
+          "color": "from-red-500 to-orange-500",
+          "skills": [
+            "Asset Management",
+            "Threat Analysis",
+            "Vulnerability Assessment"
+          ],
+          "verify": "https://www.coursera.org/account/accomplishments/records/L5LC2HU0L2CK"
+        },
+        {
+          "name": "Sound the Alarm: Detection and Response",
+          "issuer": "Google",
+          "icon": "Shield",
+          "status": "Completed",
+          "description": "Detect and respond to cybersecurity threats effectively",
+          "color": "from-red-500 to-orange-500",
+          "skills": [
+            "Threat Detection",
+            "Incident Response"
+          ],
+          "verify": "https://www.coursera.org/account/accomplishments/records/TUDKBHCQ8D1Z"
+        },
+        {
+          "name": "Automate Cybersecurity Tasks with Python",
+          "issuer": "Google",
+          "icon": "Shield",
+          "status": "Completed",
+          "description": "Automate cybersecurity processes using Python",
+          "color": "from-red-500 to-orange-500",
+          "skills": [
+            "Python Automation",
+            "Cybersecurity Tools"
+          ],
+          "verify": "https://www.coursera.org/account/accomplishments/records/6KTX4BJNNFY8"
+        }
+      ]
+    },
+    {
+      "name": "Certificate of Completion - .NET Core",
+      "issuer": "ComIT",
+      "icon": "Code",
+      "status": "Certified",
+      "description": "Modern .NET Core development and enterprise applications",
+      "color": "from-indigo-500 to-purple-600",
+      "skills": [
+        ".NET Core",
+        "C# Advanced",
+        "Entity Framework",
+        "Web APIs"
+      ],
+      "verify": "",
+      "pathway": []
+    },
+    {
+      "name": "Exam 480: Programming in HTML5 with JavaScript and CSS3",
+      "issuer": "Microsoft",
+      "icon": "Code",
+      "status": "Certified",
+      "description": "HTML5, JavaScript, and CSS3 programming expertise",
+      "color": "from-blue-600 to-indigo-600",
+      "skills": [
+        "HTML5 APIs",
+        "JavaScript ES6+",
+        "CSS3 Advanced",
+        "DOM Manipulation"
+      ],
+      "verify": "https://www.credly.com/badges/4ac93c3f-d644-4615-b0c2-f5dbc4c5a0f3",
+      "pathway": []
+    },
+    {
+      "name": "Full Stack Developer",
+      "issuer": "One Million Coders",
+      "icon": "Code",
+      "status": "Completed",
+      "description": "Comprehensive full-stack web development",
+      "color": "from-purple-500 to-pink-500",
+      "skills": [
+        "MEAN Stack",
+        "RESTful APIs",
+        "Database Design",
+        "Authentication"
+      ],
+      "verify": "https://www.coursera.org/account/accomplishments/verify/J4ST5YBWXDGJ",
+      "pathway": []
+    },
+    {
+      "name": "Verified International Academic Qualifications",
+      "issuer": "World Education Services",
+      "icon": "Certificate",
+      "status": "Verified",
+      "description": "Verification of international academic credentials",
+      "color": "from-green-500 to-teal-500",
+      "skills": [
+        "Credential Verification",
+        "Academic Records"
+      ],
+      "verify": "",
+      "pathway": []
+    },
+    {
+      "name": "HTML, CSS and JavaScript",
+      "issuer": "Coursera",
+      "icon": "Code",
+      "status": "Completed",
+      "description": "Fundamentals of web development using HTML, CSS, and JavaScript",
+      "color": "from-blue-500 to-cyan-500",
+      "skills": [
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "Web Development"
+      ],
+      "verify": "https://www.coursera.org/account/accomplishments/verify/J4ST5YBWXDGJ",
+      "pathway": []
+    }
+  ],
   "skills": {
-    "languages": [],
-    "frameworks": [],
-    "databases": [],
-    "technologies": [],
-    "versionControl": [],
-    "methodologies": [],
-    "standards": []
+    "languages": [
+      "English",
+      "Arabic"
+    ],
+    "frameworks": [
+      "Angular",
+      "React",
+      "Node.js",
+      "Express.js",
+      "Laravel",
+      "Spring Boot"
+    ],
+    "databases": [
+      "PostgreSQL",
+      "MySQL",
+      "MongoDB",
+      "SQLite"
+    ],
+    "technologies": [
+      "JavaScript",
+      "Java",
+      "TypeScript",
+      "HTML5",
+      "CSS3",
+      "SASS",
+      "SCSS",
+      "LESS",
+      "PHP",
+      "Python"
+    ],
+    "versionControl": [
+      "Git",
+      "GitHub",
+      "Bitbucket"
+    ],
+    "methodologies": [
+      "Agile",
+      "Scrum",
+      "DevOps",
+      "CI/CD"
+    ],
+    "standards": [
+      "RESTful APIs",
+      "GraphQL",
+      "OAuth",
+      "JWT",
+      "ARIA",
+      "Screen Reader Support",
+      "OWASP Top Ten",
+      "TDD",
+      "BDD",
+      "Code Quality (ESLint)",
+      "Performance Optimization"
+    ]
   },
   "projects": [],
-  "additionalInfo": ""
+  "additionalInfo": "All my projects are hosted on private repositories due to confidentiality reasons. They are available for review upon request. Security expertise demonstrated through multiple certifications, including Google Cybersecurity Certificate"
 }

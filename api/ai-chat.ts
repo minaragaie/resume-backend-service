@@ -73,24 +73,19 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       .slice(-5); // Keep last 5 assistant responses
 
     // Call Hugging Face API
-    const huggingFaceResponse = await fetch('https://api-inference.huggingface.co/models/microsoft/DialoGPT-medium', {
+    const huggingFaceResponse = await fetch('https://api-inference.huggingface.co/models/facebook/blenderbot-400M-distill', {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${process.env.HUGGINGFACE}`,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        inputs: {
-          past_user_inputs: pastUserInputs,
-          generated_responses: generatedResponses,
-          text: message
-        },
+        inputs: message,
         parameters: {
           max_length: 200,
           temperature: 0.7,
           do_sample: true,
-          return_full_text: false,
-          pad_token_id: 50256
+          return_full_text: false
         }
       })
     });

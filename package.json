@@ -22,6 +22,7 @@
   "dependencies": {
     "@octokit/rest": "^20.0.2",
     "@sparticuz/chromium": "^138.0.2",
+    "@vercel/node": "^3.0.0",
     "axios": "^1.11.0",
     "chrome-aws-lambda": "^10.1.0",
     "handlebars": "^4.7.8",

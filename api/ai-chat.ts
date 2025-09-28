@@ -75,8 +75,11 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       .map(msg => msg.content)
       .slice(-5); // Keep last 5 assistant responses
 
-    // Call Hugging Face API
-    const huggingFaceResponse = await fetch('https://api-inference.huggingface.co/models/microsoft/DialoGPT-small', {
+    // Call Hugging Face API with a more reliable model
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
+    
+    const huggingFaceResponse = await fetch('https://api-inference.huggingface.co/models/microsoft/DialoGPT-medium', {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${process.env.HUGGINGFACE}`,
@@ -89,19 +92,25 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
           text: message
         },
         parameters: {
-          max_length: 200,
-          temperature: 0.7,
+          max_length: 150,
+          temperature: 0.8,
           do_sample: true,
-          return_full_text: false
+          return_full_text: false,
+          pad_token_id: 50256
         }
-      })
+      }),
+      signal: controller.signal
     });
+    
+    clearTimeout(timeoutId);
 
     console.log('📡 Hugging Face response status:', huggingFaceResponse.status);
 
     if (!huggingFaceResponse.ok) {
       const errorText = await huggingFaceResponse.text();
       console.error('❌ Hugging Face API error:', errorText);
+      console.error('❌ Response status:', huggingFaceResponse.status);
+      console.error('❌ Response headers:', Object.fromEntries(huggingFaceResponse.headers.entries()));
       
       // Return fallback response instead of error
       const fallbackResponse = getFallbackResponse(message);

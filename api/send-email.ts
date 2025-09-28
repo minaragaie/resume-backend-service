@@ -1,6 +1,19 @@
-import type { NextApiRequest, NextApiResponse } from "next";
 import axios from "axios";
 import qs from "qs";
+
+// Define API request and response types
+interface ApiRequest {
+  method?: string;
+  body?: any;
+  headers?: { [key: string]: string | string[] | undefined };
+}
+
+interface ApiResponse {
+  status: (code: number) => ApiResponse;
+  json: (data: any) => void;
+  setHeader: (name: string, value: string) => void;
+  end: (data?: any) => void;
+}
 
 export const config = {
   api: {
@@ -25,11 +38,11 @@ async function getAccessToken() {
   return tokenResponse.data.access_token;
 }
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+export default async function handler(req: ApiRequest, res: ApiResponse) {
   // CORS headers
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
 
   if (req.method === "OPTIONS") return res.status(200).end();
   if (req.method !== "POST") return res.status(405).json({ message: "Method not allowed" });

@@ -4,15 +4,23 @@
   "description": "Backend API service for resume management with PDF generation and email functionality",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "dev": "node index.js",
+    "dev": "vercel dev",
+    "build": "echo 'Build completed'",
+    "deploy": "vercel --prod",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": ["resume", "api", "pdf", "email", "nodejs"],
+  "keywords": [
+    "resume",
+    "api",
+    "pdf",
+    "email",
+    "nodejs"
+  ],
   "author": "",
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
+    "@octokit/rest": "^20.0.2",
     "@sparticuz/chromium": "^138.0.2",
     "axios": "^1.11.0",
     "chrome-aws-lambda": "^10.1.0",

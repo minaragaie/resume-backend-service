@@ -1,5 +1,18 @@
-import type { NextApiRequest, NextApiResponse } from "next";
 import jwt from "jsonwebtoken";
+
+// Define API request and response types
+interface ApiRequest {
+  method?: string;
+  body?: any;
+  headers?: { [key: string]: string | string[] | undefined };
+}
+
+interface ApiResponse {
+  status: (code: number) => ApiResponse;
+  json: (data: any) => void;
+  setHeader: (name: string, value: string) => void;
+  end: (data?: any) => void;
+}
 
 export const config = {
   api: {
@@ -11,7 +24,7 @@ export const config = {
 // POST /api/admin-auth - Authenticate admin user
 // GET /api/admin-auth - Verify token
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+export default async function handler(req: ApiRequest, res: ApiResponse) {
   // CORS headers
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
@@ -76,16 +89,16 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     } else if (req.method === "GET") {
       // Token verification endpoint
-      const authHeader = req.headers.authorization;
+      const authHeader = req.headers?.authorization;
       
-      if (!authHeader || !authHeader.startsWith('Bearer ')) {
+      if (!authHeader || (typeof authHeader === 'string' && !authHeader.startsWith('Bearer '))) {
         return res.status(401).json({
           success: false,
           message: 'No token provided'
         });
       }
 
-      const token = authHeader.substring(7);
+      const token = typeof authHeader === 'string' ? authHeader.substring(7) : authHeader[0]?.substring(7);
       
       try {
         // Verify JWT token with proper secret

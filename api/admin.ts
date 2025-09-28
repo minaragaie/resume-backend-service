@@ -1,6 +1,19 @@
-import type { NextApiRequest, NextApiResponse } from "next";
-import fs from "fs";
-import path from "path";
+import GitHubStorage from '../github-storage';
+
+// Define API request and response types
+interface ApiRequest {
+  method?: string;
+  body?: any;
+  query?: { [key: string]: string | string[] | undefined };
+  headers?: { [key: string]: string | string[] | undefined };
+}
+
+interface ApiResponse {
+  status: (code: number) => ApiResponse;
+  json: (data: any) => void;
+  setHeader: (name: string, value: string) => void;
+  end: (data?: any) => void;
+}
 
 // Define the resume data interface
 interface ResumeData {
@@ -57,40 +70,32 @@ export const config = {
 // DELETE /api/admin?type=experience&id=1 - Delete experience
 // Similar for education and certifications
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+// GitHub storage instance
+const githubStorage = new GitHubStorage();
+
+export default async function handler(req: ApiRequest, res: ApiResponse) {
   // CORS headers
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
 
   if (req.method === "OPTIONS") return res.status(200).end();
 
-  const filePath = path.join(process.cwd(), 'data', 'resume.json');
-  const { type, id } = req.query;
+  const type = req.query?.type;
+  const id = req.query?.id;
 
   try {
-    // Read current data
-    let resumeData: ResumeData = {
-      personalInfo: {},
-      experience: [],
-      education: [],
-      certifications: [],
-      skills: {
-        languages: [],
-        frameworks: [],
-        databases: [],
-        technologies: [],
-        versionControl: [],
-        methodologies: [],
-        standards: []
-      },
-      projects: [],
-      additionalInfo: ""
-    };
-    
-    if (fs.existsSync(filePath)) {
-      const fileContent = fs.readFileSync(filePath, 'utf8');
-      resumeData = JSON.parse(fileContent);
+    // Read current data from GitHub
+    let resumeData: ResumeData;
+    try {
+      resumeData = await githubStorage.readResumeData();
+    } catch (error) {
+      console.error('Failed to read from GitHub:', error);
+      return res.status(500).json({
+        success: false,
+        message: 'Failed to read resume data from GitHub',
+        error: error.message
+      });
     }
 
     if (type === 'resume') {
@@ -118,33 +123,38 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           });
         }
 
-        // Create backup
-        if (fs.existsSync(filePath)) {
-          const backupPath = path.join(process.cwd(), 'data', `resume.backup.${Date.now()}.json`);
-          fs.copyFileSync(filePath, backupPath);
-        }
-
-        // Ensure data directory exists
-        const dataDir = path.dirname(filePath);
-        if (!fs.existsSync(dataDir)) {
-          fs.mkdirSync(dataDir, { recursive: true });
-        }
-
-        // Write the updated data
+        // Create backup before updating
         try {
-          fs.writeFileSync(filePath, JSON.stringify(newData, null, 2), 'utf8');
+          await githubStorage.createBackup(resumeData);
+        } catch (backupError) {
+          console.warn('Failed to create backup:', backupError);
+        }
+
+        // Write the updated data to GitHub
+        try {
+          const result = await githubStorage.writeResumeData(newData);
           
-          return res.status(200).json({
-            success: true,
-            message: 'Resume data saved successfully',
-            timestamp: new Date().toISOString()
-          });
+          if (result.success) {
+            return res.status(200).json({
+              success: true,
+              message: 'Resume data saved successfully to GitHub',
+              commit: result.commit,
+              url: result.url,
+              timestamp: new Date().toISOString()
+            });
+          } else {
+            return res.status(500).json({
+              success: false,
+              message: 'Failed to save resume data to GitHub',
+              error: result.error
+            });
+          }
         } catch (writeError: any) {
-          console.error('File write error:', writeError);
+          console.error('GitHub write error:', writeError);
           return res.status(500).json({
             success: false,
-            message: 'Failed to save resume data',
-            error: writeError?.message || 'File write operation failed'
+            message: 'Failed to save resume data to GitHub',
+            error: writeError?.message || 'GitHub write operation failed'
           });
         }
       } else if (req.method === "DELETE") {
@@ -159,25 +169,40 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           additionalInfo: ""
         };
 
-        // Create backup
-        if (fs.existsSync(filePath)) {
-          const backupPath = path.join(process.cwd(), 'data', `resume.backup.${Date.now()}.json`);
-          fs.copyFileSync(filePath, backupPath);
+        // Create backup before resetting
+        try {
+          await githubStorage.createBackup(resumeData);
+        } catch (backupError) {
+          console.warn('Failed to create backup:', backupError);
         }
 
-        // Ensure data directory exists
-        const dataDir = path.dirname(filePath);
-        if (!fs.existsSync(dataDir)) {
-          fs.mkdirSync(dataDir, { recursive: true });
+        // Write default data to GitHub
+        try {
+          const result = await githubStorage.writeResumeData(defaultData);
+          
+          if (result.success) {
+            return res.status(200).json({
+              success: true,
+              message: 'Resume data reset to default in GitHub',
+              commit: result.commit,
+              url: result.url,
+              timestamp: new Date().toISOString()
+            });
+          } else {
+            return res.status(500).json({
+              success: false,
+              message: 'Failed to reset resume data in GitHub',
+              error: result.error
+            });
+          }
+        } catch (writeError: any) {
+          console.error('GitHub write error:', writeError);
+          return res.status(500).json({
+            success: false,
+            message: 'Failed to reset resume data in GitHub',
+            error: writeError?.message || 'GitHub write operation failed'
+          });
         }
-
-        fs.writeFileSync(filePath, JSON.stringify(defaultData, null, 2), 'utf8');
-
-        return res.status(200).json({
-          success: true,
-          message: 'Resume data reset to default',
-          timestamp: new Date().toISOString()
-        });
       }
     }
 
@@ -218,13 +243,32 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         resumeData.experience = resumeData.experience.filter((exp: any) => exp.id !== parseInt(id as string));
       }
 
-      // Save updated data
-      fs.writeFileSync(filePath, JSON.stringify(resumeData, null, 2), 'utf8');
-      return res.status(200).json({
-        success: true,
-        message: 'Experience operation completed',
-        timestamp: new Date().toISOString()
-      });
+      // Save updated data to GitHub
+      try {
+        const result = await githubStorage.writeResumeData(resumeData);
+        
+        if (result.success) {
+          return res.status(200).json({
+            success: true,
+            message: 'Experience operation completed in GitHub',
+            commit: result.commit,
+            timestamp: new Date().toISOString()
+          });
+        } else {
+          return res.status(500).json({
+            success: false,
+            message: 'Failed to save experience data to GitHub',
+            error: result.error
+          });
+        }
+      } catch (writeError: any) {
+        console.error('GitHub write error for experience:', writeError);
+        return res.status(500).json({
+          success: false,
+          message: 'Failed to save experience data to GitHub',
+          error: writeError?.message || 'GitHub write operation failed'
+        });
+      }
     }
 
     // Handle education operations
@@ -248,12 +292,32 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         resumeData.education = resumeData.education.filter((edu: any) => edu.id !== parseInt(id as string));
       }
 
-      fs.writeFileSync(filePath, JSON.stringify(resumeData, null, 2), 'utf8');
-      return res.status(200).json({
-        success: true,
-        message: 'Education operation completed',
-        timestamp: new Date().toISOString()
-      });
+      // Save updated data to GitHub
+      try {
+        const result = await githubStorage.writeResumeData(resumeData);
+        
+        if (result.success) {
+          return res.status(200).json({
+            success: true,
+            message: 'Education operation completed in GitHub',
+            commit: result.commit,
+            timestamp: new Date().toISOString()
+          });
+        } else {
+          return res.status(500).json({
+            success: false,
+            message: 'Failed to save education data to GitHub',
+            error: result.error
+          });
+        }
+      } catch (writeError: any) {
+        console.error('GitHub write error for education:', writeError);
+        return res.status(500).json({
+          success: false,
+          message: 'Failed to save education data to GitHub',
+          error: writeError?.message || 'GitHub write operation failed'
+        });
+      }
     }
 
     // Handle certifications operations
@@ -277,12 +341,32 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         resumeData.certifications = resumeData.certifications.filter((cert: any) => cert.id !== parseInt(id as string));
       }
 
-      fs.writeFileSync(filePath, JSON.stringify(resumeData, null, 2), 'utf8');
-      return res.status(200).json({
-        success: true,
-        message: 'Certifications operation completed',
-        timestamp: new Date().toISOString()
-      });
+      // Save updated data to GitHub
+      try {
+        const result = await githubStorage.writeResumeData(resumeData);
+        
+        if (result.success) {
+          return res.status(200).json({
+            success: true,
+            message: 'Certifications operation completed in GitHub',
+            commit: result.commit,
+            timestamp: new Date().toISOString()
+          });
+        } else {
+          return res.status(500).json({
+            success: false,
+            message: 'Failed to save certifications data to GitHub',
+            error: result.error
+          });
+        }
+      } catch (writeError: any) {
+        console.error('GitHub write error for certifications:', writeError);
+        return res.status(500).json({
+          success: false,
+          message: 'Failed to save certifications data to GitHub',
+          error: writeError?.message || 'GitHub write operation failed'
+        });
+      }
     }
 
     return res.status(400).json({

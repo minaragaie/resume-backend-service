@@ -1,10 +1,25 @@
 // /pages/api/auth/callback.ts
-import type { NextApiRequest, NextApiResponse } from "next";
 import axios from "axios";
 import qs from "qs";
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  const { code } = req.query;
+// Define API request and response types
+interface ApiRequest {
+  method?: string;
+  body?: any;
+  query?: { [key: string]: string | string[] | undefined };
+  headers?: { [key: string]: string | string[] | undefined };
+}
+
+interface ApiResponse {
+  status: (code: number) => ApiResponse;
+  json: (data: any) => void;
+  setHeader: (name: string, value: string) => void;
+  end: (data?: any) => void;
+  redirect: (url: string) => void;
+}
+
+export default async function handler(req: ApiRequest, res: ApiResponse) {
+  const code = req.query?.code;
 
   console.log('code', code);
 

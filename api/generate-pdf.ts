@@ -1,8 +1,21 @@
-import { NextApiRequest, NextApiResponse } from "next";
 import puppeteer from "puppeteer-core";
 import fs from "fs";
 import path from "path";
 import Handlebars from "handlebars";
+
+// Define API request and response types
+interface ApiRequest {
+  method?: string;
+  body?: any;
+  headers?: { [key: string]: string | string[] | undefined };
+}
+
+interface ApiResponse {
+  status: (code: number) => ApiResponse;
+  json: (data: any) => void;
+  setHeader: (name: string, value: string) => void;
+  end: (data?: any) => void;
+}
 
 // Dynamic import for chromium to avoid CommonJS/ESM issues
 const chromium = require("@sparticuz/chromium");
@@ -50,7 +63,7 @@ function highlightMetrics(text: string): string {
   return highlightedText;
 }
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+export default async function handler(req: ApiRequest, res: ApiResponse) {
   // CORS headers
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");

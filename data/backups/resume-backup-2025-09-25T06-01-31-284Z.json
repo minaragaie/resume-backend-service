@@ -1,6 +1,6 @@
 {
   "personalInfo": {
-    "name": "Mina Youaness!",
+    "name": "Mina Youaness",
     "email": "minaragaie@hotmail.com",
     "phone": "609.839.3558",
     "location": "Voorhees, NJ",
@@ -427,18 +427,6 @@
       "Performance Optimization"
     ]
   },
-  "projects": [
-    {
-      "id": 1,
-      "name": "",
-      "description": "",
-      "technologies": [],
-      "status": "",
-      "year": "",
-      "githubUrl": "",
-      "liveUrl": "",
-      "imageUrl": ""
-    }
-  ],
+  "projects": [],
   "additionalInfo": "All my projects are hosted on private repositories due to confidentiality reasons. They are available for review upon request. Security expertise demonstrated through multiple certifications, including Google Cybersecurity Certificate"
 }

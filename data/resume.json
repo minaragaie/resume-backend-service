@@ -517,6 +517,21 @@
       "githubUrl": "",
       "liveUrl": "",
       "imageUrl": ""
+    },
+    {
+      "id": 7,
+      "name": "StoryVerse - Arabic Storytelling Platform",
+      "description": "Full-stack bilingual (Arabic/English) storytelling platform with real-time social features, PWA support, content protection, and comprehensive author-reader ecosystem.",
+      "technologies": ["Next.js 15", "React 19", "TypeScript", "PostgreSQL", "Prisma", "NextAuth", "Tailwind CSS", "PWA"],
+      "icon": "BookOpen",
+      "color": "from-purple-500 to-pink-500",
+      "status": "Live",
+      "year": "2025",
+      "detailsFile": "storyverse-app.md",
+      "featured": true,
+      "githubUrl": "https://github.com/minaragaie/storyverse",
+      "liveUrl": "https://storyverse-app.onrender.com",
+      "imageUrl": ""
     }
   ],
   "additionalInfo": "All my projects are hosted on private repositories due to confidentiality reasons. They are available for review upon request. Security expertise demonstrated through multiple certifications, including Google Cybersecurity Certificate"

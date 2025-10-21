@@ -431,6 +431,7 @@
     {
       "id": 1,
       "name": "Turris ERP System",
+      "slug": "turris-erp",
       "description": "Comprehensive enterprise resource planning system for managing day-to-day business activities with real-time data processing and advanced reporting capabilities.",
       "technologies": ["Angular", "DevExtreme", "Node.js", "PostgreSQL", "WebSockets", "TypeScript"],
       "icon": "Building2",
@@ -453,6 +454,7 @@
     {
       "id": 2,
       "name": "EntityConnect Platform",
+      "slug": "entityconnect",
       "description": "Entity management & communications app with membership management, event registration, online donations, and workflow automation for organizations.",
       "technologies": ["Angular", "Kendo UI", "SailsJS", "Node.js", "MySQL", "PWA"],
       "icon": "Users",
@@ -467,6 +469,7 @@
     {
       "id": 3,
       "name": "Abgadya Learning Platform",
+      "slug": "abgadya",
       "description": "Progressive Web App for high school students providing educational content through interactive books, videos, lessons, and exercises with offline capabilities.",
       "technologies": ["Angular 10", "Ionic", "PHP", "Laravel", "PWA", "WordPress"],
       "icon": "GraduationCap",
@@ -481,6 +484,7 @@
     {
       "id": 4,
       "name": "StoryVerse",
+      "slug": "storyverse",
       "description": "Full-stack bilingual (Arabic/English) storytelling platform with real-time social features, PWA support, content protection, and comprehensive author-reader ecosystem.",
       "technologies": ["Next.js 15", "React 19", "TypeScript", "PostgreSQL", "Prisma", "NextAuth", "Tailwind CSS", "PWA"],
       "icon": "BookOpen",

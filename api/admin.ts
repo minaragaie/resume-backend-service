@@ -83,6 +83,68 @@ export default async function handler(req: ApiRequest, res: ApiResponse) {
 
   const type = req.query?.type;
   const id = req.query?.id;
+  const slug = req.query?.slug;
+
+  // Handle portfolio requests (for private repos)
+  if (type === 'portfolio') {
+    if (req.method !== 'GET') {
+      return res.status(405).json({ error: 'Method not allowed' });
+    }
+
+    if (!slug || typeof slug !== 'string') {
+      return res.status(400).json({ error: 'Slug parameter is required' });
+    }
+
+    try {
+      const fs = require('fs');
+      const path = require('path');
+      
+      // Read resume data to get project info
+      const resumePath = path.join(process.cwd(), 'data', 'resume.json');
+      const resumeData = JSON.parse(fs.readFileSync(resumePath, 'utf-8'));
+      
+      // Find project by slug
+      const project = resumeData.projects?.find((p: any) => p.slug === slug);
+      
+      if (!project) {
+        return res.status(404).json({ error: 'Project not found' });
+      }
+
+      if (!project.isPrivateRepo || !project.portfolioFile) {
+        return res.status(400).json({ 
+          error: 'Project portfolio should be fetched from GitHub',
+          githubUrl: project.githubUrl 
+        });
+      }
+
+      // Read portfolio file
+      const portfolioPath = path.join(process.cwd(), 'data', 'portfolios', project.portfolioFile);
+      
+      if (!fs.existsSync(portfolioPath)) {
+        return res.status(404).json({ error: 'Portfolio file not found' });
+      }
+
+      const content = fs.readFileSync(portfolioPath, 'utf-8');
+      
+      return res.status(200).json({
+        success: true,
+        slug,
+        content,
+        project: {
+          name: project.name,
+          description: project.description,
+          githubUrl: project.githubUrl,
+          isPrivateRepo: project.isPrivateRepo
+        }
+      });
+    } catch (error) {
+      console.error('Error serving portfolio:', error);
+      return res.status(500).json({ 
+        error: 'Internal server error',
+        message: error instanceof Error ? error.message : 'Unknown error'
+      });
+    }
+  }
 
   try {
     // Read current data from GitHub

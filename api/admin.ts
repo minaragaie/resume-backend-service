@@ -39,7 +39,7 @@ interface ResumeData {
     issuer: string;
     date: string;
   }>;
-  skills: {
+  skills: { 
     languages: string[];
     frameworks: string[];
     databases: string[];
@@ -100,6 +100,88 @@ export default async function handler(req: ApiRequest, res: ApiResponse) {
 
     if (type === 'resume') {
       if (req.method === "GET") {
+        // Check for version control operations
+        const action = req.query?.action;
+        
+        if (action === 'history') {
+          // Get commit history
+          try {
+            const history = await githubStorage.getCommitHistory(20);
+            return res.status(200).json({
+              success: true,
+              history: history,
+              timestamp: new Date().toISOString()
+            });
+          } catch (error) {
+            return res.status(500).json({
+              success: false,
+              message: 'Failed to get commit history',
+              error: error.message
+            });
+          }
+        } else if (action === 'restore') {
+          // Restore from specific commit
+          const commitSha = req.query?.commit;
+          if (!commitSha) {
+            return res.status(400).json({
+              success: false,
+              message: 'Commit SHA is required for restore operation'
+            });
+          }
+          
+          try {
+            const result = await githubStorage.restoreFromCommit(commitSha, resumeData);
+            if (result.success) {
+              return res.status(200).json({
+                success: true,
+                message: result.message,
+                commit: result.commit,
+                url: result.url,
+                restoredFrom: result.restoredFrom,
+                timestamp: new Date().toISOString()
+              });
+            } else {
+              return res.status(500).json({
+                success: false,
+                message: 'Failed to restore from commit',
+                error: result.error
+              });
+            }
+          } catch (error) {
+            return res.status(500).json({
+              success: false,
+              message: 'Failed to restore from commit',
+              error: error.message
+            });
+          }
+        } else if (action === 'preview') {
+          // Preview data from specific commit without restoring
+          const commitSha = req.query?.commit;
+          if (!commitSha) {
+            return res.status(400).json({
+              success: false,
+              message: 'Commit SHA is required for preview operation'
+            });
+          }
+          
+          try {
+            const commitData = await githubStorage.getResumeDataFromCommit(commitSha);
+            return res.status(200).json({
+              success: true,
+              data: commitData,
+              commit: commitSha,
+              timestamp: new Date().toISOString()
+            });
+          } catch (error) {
+            return res.status(500).json({
+              success: false,
+              message: 'Failed to preview commit data',
+              error: error.message
+            });
+          }
+        }
+        
+        // Default: return current resume data
         return res.status(200).json({
           success: true,
           data: resumeData,
@@ -135,13 +217,13 @@ export default async function handler(req: ApiRequest, res: ApiResponse) {
           const result = await githubStorage.writeResumeData(newData);
           
           if (result.success) {
-            return res.status(200).json({
-              success: true,
+        return res.status(200).json({
+          success: true,
               message: 'Resume data saved successfully to GitHub',
               commit: result.commit,
               url: result.url,
-              timestamp: new Date().toISOString()
-            });
+          timestamp: new Date().toISOString()
+        });
           } else {
             return res.status(500).json({
               success: false,
@@ -206,6 +288,161 @@ export default async function handler(req: ApiRequest, res: ApiResponse) {
       }
     }
 
+    // Handle GitHub Activity operations
+    if (type === 'github-activity') {
+      if (req.method === "GET") {
+        try {
+          const username = req.query?.username as string;
+          if (!username) {
+            return res.status(400).json({
+              success: false,
+              message: 'Username is required'
+            });
+          }
+
+          // Fetch user repos (including private)
+          // First try to get authenticated user's repos (includes private)
+          let reposResponse;
+          try {
+            reposResponse = await githubStorage.octokit.repos.listForAuthenticatedUser({
+              sort: 'updated',
+              per_page: 100,
+              type: 'all'
+            });
+          } catch (error) {
+            // Fallback to public repos if authenticated user call fails
+            console.warn('Failed to fetch authenticated user repos, falling back to public:', error);
+            reposResponse = await githubStorage.octokit.repos.listForUser({
+              username: username,
+              sort: 'updated',
+              per_page: 100,
+              type: 'public'
+            });
+          }
+
+          const repos = reposResponse.data;
+
+          // Fetch user profile
+          let userResponse;
+          try {
+            // Try to get authenticated user profile first (includes private repo count)
+            userResponse = await githubStorage.octokit.users.getAuthenticated();
+          } catch (error) {
+            // Fallback to public user profile
+            console.warn('Failed to fetch authenticated user profile, falling back to public:', error);
+            userResponse = await githubStorage.octokit.users.getByUsername({
+              username: username
+            });
+          }
+
+          const user = userResponse.data;
+
+          // Process repos with additional data
+          const reposWithCommits = await Promise.all(
+            repos.slice(0, 20).map(async (repo: any) => {
+              try {
+                const commitsResponse = await githubStorage.octokit.repos.listCommits({
+                  owner: username,
+                  repo: repo.name,
+                  per_page: 1
+                });
+                
+                const commitsLink = commitsResponse.headers.link;
+                let commits_count = 1;
+                if (commitsLink) {
+                  const match = commitsLink.match(/&page=(\d+)>; rel="last"/);
+                  if (match) commits_count = parseInt(match[1]);
+                }
+
+                return {
+                  name: repo.name,
+                  html_url: repo.html_url,
+                  description: repo.description,
+                  language: repo.language,
+                  stargazers_count: repo.stargazers_count,
+                  forks_count: repo.forks_count,
+                  commits_count,
+                  updated_at: repo.updated_at,
+                  size: repo.size,
+                  topics: repo.topics || [],
+                  visibility: repo.private ? 'private' : 'public'
+                };
+              } catch (err) {
+                console.warn(`Failed to fetch commits for ${repo.name}:`, err);
+                return {
+                  name: repo.name,
+                  html_url: repo.html_url,
+                  description: repo.description,
+                  language: repo.language,
+                  stargazers_count: repo.stargazers_count,
+                  forks_count: repo.forks_count,
+                  commits_count: 0,
+                  updated_at: repo.updated_at,
+                  size: repo.size,
+                  topics: repo.topics || [],
+                  visibility: repo.private ? 'private' : 'public'
+                };
+              }
+            })
+          );
+
+          // Calculate stats
+          const totalStars = reposWithCommits.reduce((sum, repo) => sum + repo.stargazers_count, 0);
+          const totalForks = reposWithCommits.reduce((sum, repo) => sum + repo.forks_count, 0);
+          const totalCommits = reposWithCommits.reduce((sum, repo) => sum + repo.commits_count, 0);
+          
+          // Count private vs public repos
+          const privateRepos = reposWithCommits.filter(repo => repo.visibility === 'private').length;
+          const publicRepos = reposWithCommits.filter(repo => repo.visibility === 'public').length;
+          
+          // Language distribution
+          const languages: Record<string, number> = {};
+          reposWithCommits.forEach(repo => {
+            if (repo.language) {
+              languages[repo.language] = (languages[repo.language] || 0) + 1;
+            }
+          });
+
+          const topRepos = reposWithCommits.sort((a, b) => b.commits_count - a.commits_count).slice(0, 12);
+
+        return res.status(200).json({
+          success: true,
+            data: {
+              repos: topRepos,
+              stats: {
+                totalRepos: user.public_repos + (user.total_private_repos || 0),
+                totalStars,
+                totalForks,
+                totalCommits,
+                languages,
+                privateRepos,
+                publicRepos
+              },
+              user: {
+                login: user.login,
+                name: user.name,
+                bio: user.bio,
+                avatar_url: user.avatar_url,
+                html_url: user.html_url,
+                followers: user.followers,
+                following: user.following,
+                public_repos: user.public_repos,
+                created_at: user.created_at
+              }
+            },
+          timestamp: new Date().toISOString()
+        });
+        } catch (error) {
+          console.error('GitHub Activity API Error:', error);
+          return res.status(500).json({
+            success: false,
+            message: 'Failed to fetch GitHub activity data',
+            error: error.message
+          });
+        }
+      }
+    }
+
     // Handle experience operations
     if (type === 'experience') {
       if (!resumeData.experience) resumeData.experience = [];
@@ -248,12 +485,12 @@ export default async function handler(req: ApiRequest, res: ApiResponse) {
         const result = await githubStorage.writeResumeData(resumeData);
         
         if (result.success) {
-          return res.status(200).json({
-            success: true,
+      return res.status(200).json({
+        success: true,
             message: 'Experience operation completed in GitHub',
             commit: result.commit,
-            timestamp: new Date().toISOString()
-          });
+        timestamp: new Date().toISOString()
+      });
         } else {
           return res.status(500).json({
             success: false,
@@ -297,12 +534,12 @@ export default async function handler(req: ApiRequest, res: ApiResponse) {
         const result = await githubStorage.writeResumeData(resumeData);
         
         if (result.success) {
-          return res.status(200).json({
-            success: true,
+      return res.status(200).json({
+        success: true,
             message: 'Education operation completed in GitHub',
             commit: result.commit,
-            timestamp: new Date().toISOString()
-          });
+        timestamp: new Date().toISOString()
+      });
         } else {
           return res.status(500).json({
             success: false,
@@ -346,12 +583,12 @@ export default async function handler(req: ApiRequest, res: ApiResponse) {
         const result = await githubStorage.writeResumeData(resumeData);
         
         if (result.success) {
-          return res.status(200).json({
-            success: true,
+      return res.status(200).json({
+        success: true,
             message: 'Certifications operation completed in GitHub',
             commit: result.commit,
-            timestamp: new Date().toISOString()
-          });
+        timestamp: new Date().toISOString()
+      });
         } else {
           return res.status(500).json({
             success: false,

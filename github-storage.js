@@ -93,6 +93,94 @@ class GitHubStorage {
     }
   }
 
+  async getCommitHistory(limit = 10) {
+    try {
+      const { data } = await this.octokit.repos.listCommits({
+        owner: this.owner,
+        repo: this.repo,
+        path: this.filePath,
+        per_page: limit
+      });
+
+      return data.map(commit => ({
+        sha: commit.sha,
+        message: commit.commit.message,
+        author: commit.commit.author.name,
+        date: commit.commit.author.date,
+        url: commit.html_url
+      }));
+    } catch (error) {
+      console.error('Error getting commit history:', error);
+      throw error;
+    }
+  }
+
+  async getResumeDataFromCommit(commitSha) {
+    try {
+      const { data } = await this.octokit.repos.getContent({
+        owner: this.owner,
+        repo: this.repo,
+        path: this.filePath,
+        ref: commitSha
+      });
+      
+      const content = Buffer.from(data.content, 'base64').toString();
+      return JSON.parse(content);
+    } catch (error) {
+      console.error('Error reading from specific commit:', error);
+      throw error;
+    }
+  }
+
+  async restoreFromCommit(commitSha, resumeData) {
+    try {
+      // Get the file content from the specific commit
+      const { data: commitFile } = await this.octokit.repos.getContent({
+        owner: this.owner,
+        repo: this.repo,
+        path: this.filePath,
+        ref: commitSha
+      });
+
+      // Get current file SHA for update
+      let currentSha = null;
+      try {
+        const { data: currentFile } = await this.octokit.repos.getContent({
+          owner: this.owner,
+          repo: this.repo,
+          path: this.filePath,
+        });
+        currentSha = currentFile.sha;
+      } catch (error) {
+        if (error.status !== 404) throw error;
+      }
+
+      // Restore the file content from the commit
+      const { data } = await this.octokit.repos.createOrUpdateFileContents({
+        owner: this.owner,
+        repo: this.repo,
+        path: this.filePath,
+        message: `Restore resume data from commit ${commitSha.substring(0, 7)}`,
+        content: commitFile.content, // Use the content from the commit
+        sha: currentSha,
+      });
+
+      return {
+        success: true,
+        commit: data.commit.sha,
+        message: `Resume data restored from commit ${commitSha.substring(0, 7)}`,
+        url: data.content.html_url,
+        restoredFrom: commitSha
+      };
+    } catch (error) {
+      console.error('Error restoring from commit:', error);
+      return {
+        success: false,
+        error: error.message
+      };
+    }
+  }
+
   getDefaultResumeData() {
     return {
       personalInfo: {

@@ -440,6 +440,8 @@
       "year": "2023-2025",
       "featured": true,
       "githubUrl": "https://github.com/minaragaie/turris-erp-frontend",
+      "isPrivateRepo": true,
+      "portfolioFile": "turris-erp.md",
       "relatedRepos": [
         {
           "name": "Backend API",
@@ -448,8 +450,7 @@
         }
       ],
       "liveUrl": "",
-      "imageUrl": "",
-      "portfolioLocation": "frontend"
+      "imageUrl": ""
     },
     {
       "id": 2,
@@ -463,6 +464,8 @@
       "year": "2018-2022",
       "featured": true,
       "githubUrl": "https://github.com/minaragaie/quaenet",
+      "isPrivateRepo": true,
+      "portfolioFile": "entityconnect.md",
       "liveUrl": "",
       "imageUrl": ""
     },
@@ -477,7 +480,9 @@
       "status": "Active",
       "year": "2018-2021",
       "featured": true,
-      "githubUrl": "https://github.com/minaragaie/abgadya",
+      "githubUrl": "https://github.com/minaragaie/abgadeya",
+      "isPrivateRepo": true,
+      "portfolioFile": "abgadya.md",
       "liveUrl": "",
       "imageUrl": ""
     },
@@ -493,6 +498,8 @@
       "year": "2025",
       "featured": true,
       "githubUrl": "https://github.com/minaragaie/storyverse-app",
+      "isPrivateRepo": true,
+      "portfolioFile": "storyverse.md",
       "liveUrl": "https://storyverse-app.onrender.com",
       "imageUrl": ""
     },

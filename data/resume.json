@@ -439,8 +439,16 @@
       "year": "2023-2025",
       "featured": true,
       "githubUrl": "https://github.com/minaragaie/turris-erp-frontend",
+      "relatedRepos": [
+        {
+          "name": "Backend API",
+          "url": "https://github.com/minaragaie/turris-erp-backend",
+          "description": "Node.js backend with PostgreSQL"
+        }
+      ],
       "liveUrl": "",
-      "imageUrl": ""
+      "imageUrl": "",
+      "portfolioLocation": "frontend"
     },
     {
       "id": 2,

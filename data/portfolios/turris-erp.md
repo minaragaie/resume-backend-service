@@ -948,34 +948,34 @@ For more information about this project, please contact me through my portfolio.
 ## Screenshots & Demos
 
 ### Authentication & Login
-![Login Interface](/screenshots/login.png)
+![Login Interface](https://resume-backend-service.vercel.app/screenshots/login.png)
 
 <small>*Secure user authentication interface with Two-Factor Authentication (2FA) support*</small>
 
 ### Dashboard & Project Overview
-![Main Dashboard](/screenshots/dashboard.png)
+![Main Dashboard](https://resume-backend-service.vercel.app/screenshots/dashboard.png)
 
 <small>*Comprehensive dashboard featuring QuickBooks integration panel, task management grid, site details, and job details with real-time project information and multi-module overview*</small>
 
 ### Job Management System
-![Job Management Screenshot](/screenshots/job-management.png)
+![Job Management Screenshot](https://resume-backend-service.vercel.app/screenshots/job-management.png)
 
 <small>*Complete job lifecycle tracking with status workflow - DevExtreme data grid with custom columns, filters, and action buttons showing jobs from creation through completion*</small>
 
 ### Timesheet Management
 
 #### Simplified Timesheet Mode
-![Simplified Timesheet View](/screenshots/timesheet-simplified.png)
+![Simplified Timesheet View](https://resume-backend-service.vercel.app/screenshots/timesheet-simplified.png)
 
 <small>*Simplified timesheet mode with weekly task tracking and overtime calculations*</small>
 
 #### Detailed Expense Tracking
-![Detailed Timesheet View](/screenshots/timesheet-detailed.png)
+![Detailed Timesheet View](https://resume-backend-service.vercel.app/screenshots/timesheet-detailed.png)
 
 <small>*Detailed timesheet mode with comprehensive expense tracking including hotel stays, meal expenses, and travel hours distributed proportionally across multiple jobs*</small>
 
 ### Approval Workflow
-![Timesheet Approval Interface](/screenshots/approval-workflow.png)
+![Timesheet Approval Interface](https://resume-backend-service.vercel.app/screenshots/approval-workflow.png)
 
 <small>*Group-based timesheet approval system with expandable user entries, showing submission status, approval controls, and timesheet sync status with batch approve functionality*</small>
 

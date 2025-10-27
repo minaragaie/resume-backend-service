@@ -505,6 +505,23 @@
     },
     {
       "id": 5,
+      "name": "Rogers Motors Dealership Platform",
+      "slug": "rogers-motors",
+      "description": "Enterprise-level automotive dealership platform featuring custom WordPress plugin architecture, RESTful API integration, and advanced inventory management with real-time vehicle search and lead generation workflows.",
+      "technologies": ["WordPress", "PHP", "JavaScript", "jQuery", "REST API", "AJAX", "SCSS", "Tailwind CSS", "MySQL"],
+      "icon": "Car",
+      "color": "from-blue-500 to-indigo-500",
+      "status": "Live",
+      "year": "2020-2021",
+      "featured": true,
+      "githubUrl": "",
+      "isPrivateRepo": true,
+      "portfolioFile": "rogers-motors.md",
+      "liveUrl": "",
+      "imageUrl": ""
+    },
+    {
+      "id": 6,
       "name": "Medical Rep Management System",
       "description": "Healthcare industry solution helping pharmaceutical companies manage sales teams and medical representatives with real-time tracking and reporting.",
       "technologies": ["Ionic", "Angular 7-10", "Bootstrap", "PHP", "MySQL", "Cross-platform"],
@@ -518,7 +535,7 @@
       "imageUrl": ""
     },
     {
-      "id": 6,
+      "id": 7,
       "name": "WordPress Booking Engine",
       "description": "Custom WordPress plugin featuring a fully functional reservation system with payment integration, calendar management, and automated notifications.",
       "technologies": ["WordPress", "PHP", "JavaScript", "MySQL", "Bootstrap", "Payment APIs"],
@@ -532,7 +549,7 @@
       "imageUrl": ""
     },
     {
-      "id": 7,
+      "id": 8,
       "name": "Real-time Communication Suite",
       "description": "WebSocket-based communication platform enabling real-time messaging, notifications, and data synchronization across multiple client applications.",
       "technologies": ["WebSockets", "Node.js", "React", "TypeScript", "Redis", "Socket.io"],

@@ -75,7 +75,7 @@ export default async function handler(req: ApiRequest, res: ApiResponse) {
   try {
     // Read resume data from the API
     const resumeResponse = await fetch(`${process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'http://localhost:3000'}/api/admin?type=resume`);
-    const resumeResult = await resumeResponse.json();
+    const resumeResult = await resumeResponse.json() as { success: boolean; data?: any };
     
     if (!resumeResult.success) {
       return res.status(500).json({ message: "Failed to fetch resume data" });

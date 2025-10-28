@@ -446,13 +446,13 @@
       "status": "Production",
       "year": "2023-2025",
       "featured": true,
-      "githubUrl": "https://github.com/minaragaie/turris-erp-frontend",
+      "githubUrl": "https://github.com/minaragaie/erp-frontend",
       "isPrivateRepo": true,
       "portfolioFile": "turris-erp.md",
       "relatedRepos": [
         {
           "name": "Backend API",
-          "url": "https://github.com/minaragaie/turris-erp-backend",
+          "url": "https://github.com/minaragaie/erp-backend",
           "description": "Node.js backend with PostgreSQL",
           "isPrivate": true
         }
@@ -528,7 +528,7 @@
       "status": "Live",
       "year": "2025",
       "featured": true,
-      "githubUrl": "https://github.com/minaragaie/storyverse-app",
+      "githubUrl": "https://github.com/minaragaie/storyverse",
       "isPrivateRepo": true,
       "portfolioFile": "storyverse.md",
       "liveUrl": "https://storyverse-app.onrender.com",

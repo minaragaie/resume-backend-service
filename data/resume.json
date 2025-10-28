@@ -505,20 +505,27 @@
     },
     {
       "id": 5,
-      "name": "Rogers Motors Dealership Platform",
+      "name": "Rogers Motors",
       "slug": "rogers-motors",
-      "description": "Enterprise-level automotive dealership platform featuring custom WordPress plugin architecture, RESTful API integration, and advanced inventory management with real-time vehicle search and lead generation workflows.",
-      "technologies": ["WordPress", "PHP", "JavaScript", "jQuery", "REST API", "AJAX", "SCSS", "Tailwind CSS", "MySQL"],
+      "description": "Automotive dealership platform featuring a custom WordPress plugin architecture, RESTful API integration, and modern frontend implementation",
+      "technologies": ["WordPress", "PHP", "JavaScript", "jQuery", "Tailwind CSS", "SCSS", "MySQL", "REST API"],
       "icon": "Car",
-      "color": "from-blue-500 to-indigo-500",
-      "status": "Live",
-      "year": "2020-2021",
+      "color": "from-red-500 to-pink-500",
+      "status": "Production",
+      "year": "2024",
       "featured": true,
-      "githubUrl": "",
+      "githubUrl": "https://github.com/minaragaie/wp-autocart",
       "isPrivateRepo": true,
       "portfolioFile": "rogers-motors.md",
       "liveUrl": "https://www.rogersmotors.ca/",
-      "imageUrl": ""
+      "imageUrl": "",
+      "relatedRepos": [
+        {
+          "name": "wp-autocart",
+          "url": "https://github.com/minaragaie/wp-autocart",
+          "description": "Main WordPress plugin repository"
+        }
+      ]
     },
     {
       "id": 6,

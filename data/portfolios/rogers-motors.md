@@ -8,7 +8,7 @@ Enterprise-level automotive dealership platform featuring a custom WordPress plu
 **Project Type:** Custom Plugin Development, Theme Development, API Integration  
 **Industry:** Automotive Sales & Service
 
-> 💡 **Live Demo:** Available upon request for portfolio review
+> 💡 **Live Demo:** https://gamma.harplabs.com/
 
 ---
 

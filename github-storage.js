@@ -181,6 +181,25 @@ class GitHubStorage {
     }
   }
 
+  async getFileContent(filePath) {
+    try {
+      const { data } = await this.octokit.repos.getContent({
+        owner: this.owner,
+        repo: this.repo,
+        path: filePath,
+      });
+      
+      return Buffer.from(data.content, 'base64').toString('utf-8');
+    } catch (error) {
+      if (error.status === 404) {
+        console.warn(`File not found: ${filePath}`);
+        return null;
+      }
+      console.error('Error reading file from GitHub:', error);
+      throw error;
+    }
+  }
+
   getDefaultResumeData() {
     return {
       personalInfo: {

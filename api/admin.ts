@@ -96,12 +96,8 @@ export default async function handler(req: ApiRequest, res: ApiResponse) {
     }
 
     try {
-      const fs = require('fs');
-      const path = require('path');
-      
-      // Read resume data to get project info
-      const resumePath = path.join(process.cwd(), 'data', 'resume.json');
-      const resumeData = JSON.parse(fs.readFileSync(resumePath, 'utf-8'));
+      // Read resume data from GitHub storage
+      const resumeData = await githubStorage.readResumeData();
       
       // Find project by slug
       const project = resumeData.projects?.find((p: any) => p.slug === slug);
@@ -117,14 +113,13 @@ export default async function handler(req: ApiRequest, res: ApiResponse) {
         });
       }
 
-      // Read portfolio file
-      const portfolioPath = path.join(process.cwd(), 'data', 'portfolios', project.portfolioFile);
+      // Fetch portfolio content from GitHub
+      const portfolioFile = `data/portfolios/${project.portfolioFile}`;
+      const content = await githubStorage.getFileContent(portfolioFile);
       
-      if (!fs.existsSync(portfolioPath)) {
+      if (!content) {
         return res.status(404).json({ error: 'Portfolio file not found' });
       }
-
-      const content = fs.readFileSync(portfolioPath, 'utf-8');
       
       return res.status(200).json({
         success: true,

@@ -658,6 +658,33 @@
       "liveUrl": "",
       "imageUrl": ""
     }
+    ,
+    {
+      "id": 10,
+      "name": "Portfolio Site (minaragaie.github.io)",
+      "slug": "minaragaie-github-io",
+      "description": "Developer portfolio and resume site with VS Code-inspired UI, GitHub-backed content (no database), unified backend API via GitHub Storage, static-exported Next.js frontend on GitHub Pages, and serverless admin powered by GitHub API.",
+      "technologies": [
+        "Next.js 15",
+        "React 19",
+        "TypeScript",
+        "Tailwind CSS",
+        "Lucide Icons",
+        "Vercel Serverless",
+        "@octokit/rest",
+        "GitHub Pages"
+      ],
+      "icon": "Layout",
+      "color": "from-sky-500 to-cyan-500",
+      "status": "Live",
+      "year": "2025",
+      "featured": true,
+      "githubUrl": "https://github.com/minaragaie/minaragaie.github.io",
+      "isPrivateRepo": true,
+      "portfolioFile": "minaragaie-github-io.md",
+      "liveUrl": "https://minaragaie.github.io/",
+      "imageUrl": ""
+    }
   ],
   "additionalInfo": "All my projects are hosted on private repositories due to confidentiality reasons. They are available for review upon request. Security expertise demonstrated through multiple certifications, including Google Cybersecurity Certificate"
 }

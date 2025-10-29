@@ -570,6 +570,33 @@
     },
     {
       "id": 6,
+      "name": "JobTracker Pro",
+      "slug": "job-tracker-pro",
+      "description": "Smart job application manager with Chrome extension for LinkedIn/Indeed import, AI-assisted resume parsing, and comprehensive application tracking with PostgreSQL database",
+      "technologies": [
+        "Next.js 15",
+        "React 18",
+        "TypeScript",
+        "Prisma",
+        "PostgreSQL",
+        "shadcn/ui",
+        "OpenResume AI",
+        "Chrome Extension",
+        "bcryptjs"
+      ],
+      "icon": "Briefcase",
+      "color": "from-blue-500 to-indigo-600",
+      "status": "Active",
+      "year": "2025",
+      "featured": true,
+      "githubUrl": "https://github.com/minaragaie/job-tracker-frontend",
+      "isPrivateRepo": true,
+      "portfolioFile": "job-tracker-pro.md",
+      "liveUrl": "",
+      "imageUrl": ""
+    },
+    {
+      "id": 7,
       "name": "Medical Rep Management System",
       "description": "Healthcare industry solution helping pharmaceutical companies manage sales teams and medical representatives with real-time tracking and reporting.",
       "technologies": [
@@ -590,7 +617,7 @@
       "imageUrl": ""
     },
     {
-      "id": 7,
+      "id": 8,
       "name": "WordPress Booking Engine",
       "description": "Custom WordPress plugin featuring a fully functional reservation system with payment integration, calendar management, and automated notifications.",
       "technologies": [
@@ -611,7 +638,7 @@
       "imageUrl": ""
     },
     {
-      "id": 8,
+      "id": 9,
       "name": "Real-time Communication Suite",
       "description": "WebSocket-based communication platform enabling real-time messaging, notifications, and data synchronization across multiple client applications.",
       "technologies": [

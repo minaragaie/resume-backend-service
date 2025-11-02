@@ -52,7 +52,8 @@
         "Participated in code reviews, optimizing quality and maintainability.",
         "Stayed updated on industry trends, expanding skills for innovative solutions.",
         "Ensured secure development practices, including data validation and protection of sensitive user information, throughout the lifecycle of PWA and API development."
-      ]
+      ],
+      "projects": ["turris-erp", "rogers-motors", "storyverse", "job-tracker-pro", "minaragaie-github-io"]
     },
     {
       "id": 1,
@@ -74,7 +75,8 @@
         "Built industrial web applications with focus on scalability and performance.",
         "Collaborated with stakeholders to understand business requirements and translate them into technical solutions.",
         "Ensured data integrity and security throughout the ERP system lifecycle."
-      ]
+      ],
+      "projects": ["turris-erp"]
     },
     {
       "id": 2,
@@ -102,7 +104,8 @@
         "Built reporting and assimilation features to enhance church community engagement.",
         "Utilized Angular with Kendo UI for rich, interactive user interfaces.",
         "Implemented SailsJS and Node.js backend for scalable server-side operations."
-      ]
+      ],
+      "projects": ["entityconnect"]
     },
     {
       "id": 3,
@@ -128,7 +131,8 @@
         "Integrated WordPress for content management and administrative features.",
         "Designed user-friendly interface optimized for student learning experience.",
         "Implemented interactive exercises and progress tracking for enhanced student engagement."
-      ]
+      ],
+      "projects": ["abgadya"]
     },
     {
       "id": 4,

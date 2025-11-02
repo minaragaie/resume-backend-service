@@ -13,7 +13,7 @@
   "experience": [
     {
       "id": 0,
-      "company": "HARPLABS INC.",
+      "company": "HarpLabs Inc.",
       "title": "Full-Stack Web Developer",
       "startDate": "Feb 2023",
       "endDate": "April 2025",
@@ -57,7 +57,7 @@
     },
     {
       "id": 1,
-      "company": "TURRIS GROUP",
+      "company": "Turris Group",
       "title": "Full-Stack Web Developer (Contract for Turris Group)",
       "startDate": "May 2022",
       "endDate": "April 2025",
@@ -80,7 +80,7 @@
     },
     {
       "id": 2,
-      "company": "QUAENET",
+      "company": "Quaenet",
       "title": "Full-Stack Web Developer",
       "startDate": "May 2018",
       "endDate": "April 2022",
@@ -109,7 +109,7 @@
     },
     {
       "id": 3,
-      "company": "ASQUERA",
+      "company": "Asquera",
       "title": "Full-Stack Web Developer",
       "startDate": "May 2018",
       "endDate": "April 2021",
@@ -136,7 +136,7 @@
     },
     {
       "id": 4,
-      "company": "CADUCEUS LANE",
+      "company": "Caduceus Lane",
       "title": "Full-Stack Web Developer (Freelance)",
       "startDate": "April 2016",
       "endDate": "April 2018",

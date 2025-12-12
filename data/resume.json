@@ -53,7 +53,10 @@
         "Stayed updated on industry trends, expanding skills for innovative solutions.",
         "Ensured secure development practices, including data validation and protection of sensitive user information, throughout the lifecycle of PWA and API development."
       ],
-      "projects": ["turris-erp", "rogers-motors"]
+      "projects": [
+        "turris-erp",
+        "rogers-motors"
+      ]
     },
     {
       "id": 1,
@@ -76,7 +79,9 @@
         "Collaborated with stakeholders to understand business requirements and translate them into technical solutions.",
         "Ensured data integrity and security throughout the ERP system lifecycle."
       ],
-      "projects": ["turris-erp"]
+      "projects": [
+        "turris-erp"
+      ]
     },
     {
       "id": 2,
@@ -105,7 +110,9 @@
         "Utilized Angular with Kendo UI for rich, interactive user interfaces.",
         "Implemented SailsJS and Node.js backend for scalable server-side operations."
       ],
-      "projects": ["entityconnect"]
+      "projects": [
+        "entityconnect"
+      ]
     },
     {
       "id": 3,
@@ -132,7 +139,9 @@
         "Designed user-friendly interface optimized for student learning experience.",
         "Implemented interactive exercises and progress tracking for enhanced student engagement."
       ],
-      "projects": ["abgadya"]
+      "projects": [
+        "abgadya"
+      ]
     },
     {
       "id": 4,
@@ -661,8 +670,7 @@
       "githubUrl": "",
       "liveUrl": "",
       "imageUrl": ""
-    }
-    ,
+    },
     {
       "id": 10,
       "name": "Portfolio Site (minaragaie.github.io)",
